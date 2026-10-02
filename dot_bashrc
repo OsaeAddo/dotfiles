@@ -1,0 +1,27 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+
+# SSH agent
+eval "$(ssh-agent -s)" > /dev/null
+ssh-add ~/.ssh/id_personal 2>/dev/null
+ssh-add ~/.ssh/id_ssgigs 2>/dev/null
+. "$HOME/.local/bin/env"
+export PATH="$HOME/.local/share/uv/tools/hyprmod/bin:$PATH"
+nitch
+
+. "$HOME/.atuin/bin/env"
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
+
+source '/home/osae/.bash_completions/tg-cleaner.sh'
+
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
